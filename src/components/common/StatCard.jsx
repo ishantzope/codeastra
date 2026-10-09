@@ -7,83 +7,76 @@ export default function StatCard({
   icon: Icon,
   trend,
   trendDirection = 'up',
-  statusColor = 'rose',
-  leadBadge,
+  trendType = 'default', // 'danger', 'warning', 'success', 'info', 'default'
+  iconColor = 'default',  // 'rose', 'sky', 'indigo', 'amber', 'emerald', 'default'
   onClick
 }) {
-  const colorMap = {
-    rose: {
-      border: 'border-rose-200 hover:border-rose-300',
-      iconBg: 'bg-rose-50 text-rose-600 border border-rose-100',
-      badge: 'bg-rose-50 text-rose-700 border-rose-200',
-      trendUp: 'text-rose-600',
-      trendDown: 'text-emerald-600'
-    },
-    amber: {
-      border: 'border-amber-200 hover:border-amber-300',
-      iconBg: 'bg-amber-50 text-amber-600 border border-amber-100',
-      badge: 'bg-amber-50 text-amber-800 border-amber-200',
-      trendUp: 'text-amber-700',
-      trendDown: 'text-emerald-600'
-    },
-    cyan: {
-      border: 'border-sky-200 hover:border-sky-300',
-      iconBg: 'bg-sky-50 text-sky-600 border border-sky-100',
-      badge: 'bg-sky-50 text-sky-700 border-sky-200',
-      trendUp: 'text-sky-700',
-      trendDown: 'text-emerald-600'
-    },
-    emerald: {
-      border: 'border-emerald-200 hover:border-emerald-300',
-      iconBg: 'bg-emerald-50 text-emerald-600 border border-emerald-100',
-      badge: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      trendUp: 'text-rose-600',
-      trendDown: 'text-emerald-600'
-    },
-    purple: {
-      border: 'border-purple-200 hover:border-purple-300',
-      iconBg: 'bg-purple-50 text-purple-600 border border-purple-100',
-      badge: 'bg-purple-50 text-purple-700 border-purple-200',
-      trendUp: 'text-purple-700',
-      trendDown: 'text-emerald-600'
-    }
+  // Apple-like subtle semantic tint for icons
+  const iconBgClasses = {
+    rose: 'bg-rose-50 text-rose-600 border-rose-100',
+    sky: 'bg-sky-50 text-sky-600 border-sky-100',
+    indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100',
+    amber: 'bg-amber-50 text-amber-600 border-amber-100',
+    emerald: 'bg-emerald-50 text-emerald-600 border-emerald-100',
+    default: 'bg-neutral-100 text-neutral-700 border-neutral-200'
   };
 
-  const scheme = colorMap[statusColor] || colorMap.rose;
+  // Determine trend color
+  const getTrendBadgeClass = () => {
+    if (trendType === 'danger' || (trend && (trend.includes('CRITICAL') || trend.includes('+')) && !trend.includes('Days'))) {
+      return 'bg-rose-50 text-rose-700 border-rose-200';
+    }
+    if (trendType === 'warning' || (trend && trend.includes('ELEVATED'))) {
+      return 'bg-amber-50 text-amber-700 border-amber-200';
+    }
+    if (trendType === 'success' || (trend && (trend.includes('STABLE') || trend.includes('Nominal')))) {
+      return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+    }
+    if (trendType === 'info' || (trend && trend.includes('Days'))) {
+      return 'bg-sky-50 text-sky-700 border-sky-200';
+    }
+    return 'bg-neutral-100 text-neutral-700 border-neutral-200';
+  };
 
   return (
     <div
       onClick={onClick}
-      className={`relative overflow-hidden rounded-2xl bg-white p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-all duration-300 ${onClick ? 'cursor-pointer hover:border-slate-300' : ''}`}
+      className={`rounded-2xl sm:rounded-3xl bg-white p-5 sm:p-6 border border-neutral-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-200 flex flex-col justify-between ${
+        onClick ? 'cursor-pointer hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:border-neutral-300' : ''
+      }`}
     >
-      <div className="flex items-start justify-between">
-        <div className="space-y-1">
-          <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">{title}</p>
-          <div className="flex items-baseline space-x-2">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">{value}</h3>
-            {subvalue && <span className="text-xs text-slate-500 font-medium">{subvalue}</span>}
-          </div>
-        </div>
+      {/* Top Row: Title + Apple Rounded Icon Chip */}
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-neutral-500">
+          {title}
+        </span>
         {Icon && (
-          <div className={`p-2.5 rounded-xl ${scheme.iconBg}`}>
-            <Icon className="w-5 h-5" />
+          <div className={`w-8 h-8 rounded-xl flex items-center justify-center border shrink-0 transition-colors ${iconBgClasses[iconColor] || iconBgClasses.default}`}>
+            <Icon className="w-4 h-4" />
           </div>
         )}
       </div>
 
-      <div className="mt-4 flex items-center justify-between text-xs">
-        {trend && (
-          <div className="flex items-center space-x-1 font-semibold">
-            <span className={trendDirection === 'up' ? scheme.trendUp : scheme.trendDown}>
-              {trendDirection === 'up' ? '▲' : '▼'} {trend}
-            </span>
-            <span className="text-slate-400 text-[11px] font-normal">vs 14d baseline</span>
+      {/* Prominent Monospace Metric (Apple Pro typography, no wrapping) */}
+      <div className="mt-3">
+        <div className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 font-mono whitespace-nowrap truncate">
+          {value}
+        </div>
+
+        {/* Restrained Subtitle & Trend Pill */}
+        {(subvalue || trend) && (
+          <div className="mt-2 flex items-center space-x-2 text-xs font-mono truncate flex-wrap gap-y-1">
+            {trend && (
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border shrink-0 ${getTrendBadgeClass()}`}>
+                {trendDirection === 'up' ? '↑' : '↓'} {trend}
+              </span>
+            )}
+            {subvalue && (
+              <span className="truncate text-neutral-500 text-[11px]">
+                {subvalue}
+              </span>
+            )}
           </div>
-        )}
-        {leadBadge && (
-          <span className={`px-2 py-0.5 rounded-md border text-[11px] font-bold ${scheme.badge}`}>
-            {leadBadge}
-          </span>
         )}
       </div>
     </div>

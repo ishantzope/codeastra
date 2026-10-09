@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { DISEASES, SURVEILLANCE_ZONES, HACKATHON_SCENARIOS, ALERT_LEVELS } from '../constants/outbreakData';
+import { DISEASES, SURVEILLANCE_ZONES, HACKATHON_SCENARIOS } from '../constants/outbreakData';
 import { generateBaselineHistory, applyScenarioSurge, analyzeOutbreakData, generateLiveTelemetryItem, getInitialAlerts } from '../services/simulationEngine';
 import { OutbreakContext } from './outbreakContextDef';
 

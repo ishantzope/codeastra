@@ -13,7 +13,7 @@ export const DISEASES = [
     baselinePharmacyRate: 35, // packs/day
     r0: 2.35,
     severity: 'High',
-    color: '#ef4444', // red
+    color: '#e11d48', // subtle crimson/rose
     earlyWarningLeadDays: 4.2,
     symptoms: ['Acute Dyspnea', 'High Spiking Fever', 'Persistent Cough', 'Hypoxemia'],
     remedyProtocol: 'Mobilize antiviral reserves, activate negative pressure wards, issue N95 mandate',
@@ -30,7 +30,7 @@ export const DISEASES = [
     baselinePharmacyRate: 18,
     r0: 2.10,
     severity: 'Critical',
-    color: '#f97316', // orange
+    color: '#0284c7', // subtle ocean/sky
     earlyWarningLeadDays: 3.5,
     symptoms: ['Profuse Watery Diarrhea', 'Severe Dehydration', 'Vomiting', 'Electrolyte Shock'],
     remedyProtocol: 'Issue municipal boil-water notice, chlorinate Zone B reservoirs, deploy ORS field depots',
@@ -47,7 +47,7 @@ export const DISEASES = [
     baselinePharmacyRate: 25,
     r0: 1.85,
     severity: 'High',
-    color: '#eab308', // amber
+    color: '#d97706', // subtle amber
     earlyWarningLeadDays: 2.8,
     symptoms: ['Saddleback High Fever', 'Retro-orbital Pain', 'Severe Thrombocytopenia', 'Petechial Rash'],
     remedyProtocol: 'Initiate thermal fogging vector containment, secure platelet reserves, open fever clinics',
@@ -64,7 +64,7 @@ export const DISEASES = [
     baselinePharmacyRate: 10,
     r0: 1.60,
     severity: 'Critical',
-    color: '#dc2626',
+    color: '#ea580c', // subtle orange
     earlyWarningLeadDays: 5.1,
     symptoms: ['Acute Respiratory Distress Syndrome', 'Fever > 39.5°C', 'Encephalopathy', 'Leukopenia'],
     remedyProtocol: 'Activate Tier-1 Bio-Surveillance quarantine, deploy Oseltamivir ring prophylaxis, halt poultry logistics',
@@ -81,7 +81,7 @@ export const DISEASES = [
     baselinePharmacyRate: 40,
     r0: 2.80,
     severity: 'Medium',
-    color: '#3b82f6',
+    color: '#7c3aed', // subtle violet
     earlyWarningLeadDays: 2.1,
     symptoms: ['Sudden Explosive Vomiting', 'Abdominal Cramping', 'Low Fever', 'Nausea'],
     remedyProtocol: 'Deep chemical sanitization in institutional cafeterias, isolate school clusters, rehydration care',
@@ -98,7 +98,7 @@ export const DISEASES = [
     baselinePharmacyRate: 8,
     r0: 1.30,
     severity: 'Critical',
-    color: '#a855f7',
+    color: '#be123c', // subtle ruby
     earlyWarningLeadDays: 3.0,
     symptoms: ['Ventilator-Associated Pneumonia', 'Sepsis', 'Multidrug Resistance', 'Urinary Infection'],
     remedyProtocol: 'Enforce strict cohort isolation in ICU, audit antimicrobial stewardship, sterile air filtration',
@@ -250,7 +250,7 @@ export const ALERT_LEVELS = {
     name: 'Early Advisory',
     badge: 'ADVISORY',
     color: '#d97706',
-    bgClass: 'bg-amber-50 text-amber-900 border-amber-200',
+    bgClass: 'bg-amber-50 text-amber-800 border-amber-200',
     description: 'CUSUM threshold exceeded (C > 3.0) or Z-score > 2.0. Clinical ED admissions showing upward slope.'
   },
   WARNING: {
@@ -258,7 +258,7 @@ export const ALERT_LEVELS = {
     name: 'Outbreak Warning',
     badge: 'WARNING',
     color: '#ea580c',
-    bgClass: 'bg-orange-50 text-orange-900 border-orange-200',
+    bgClass: 'bg-orange-50 text-orange-800 border-orange-200',
     description: 'Multi-stream concordance confirmed. R_t > 1.4 across multiple wards. Rapid response teams put on standby.'
   },
   CRITICAL: {
@@ -266,7 +266,7 @@ export const ALERT_LEVELS = {
     name: 'Crisis / Outbreak Red',
     badge: 'CRITICAL EMERGENCY',
     color: '#e11d48',
-    bgClass: 'bg-rose-50 text-rose-900 border-rose-300',
+    bgClass: 'bg-rose-50 text-rose-800 border-rose-200',
     description: 'Confirmed localized epidemic cluster. R_t > 2.0, ICU bed surge pressure > 85%. Automated emergency protocols activated.'
   }
 };

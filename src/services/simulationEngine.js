@@ -1,4 +1,4 @@
-import { DISEASES, SURVEILLANCE_ZONES, ALERT_LEVELS } from '../constants/outbreakData';
+import { DISEASES, SURVEILLANCE_ZONES } from '../constants/outbreakData';
 import { calculateCUSUM, calculateFarringtonThresholds, estimateRt, computeOutbreakThreatIndex } from './detectionAlgorithms';
 
 let telemetryIdSeq = 0;
