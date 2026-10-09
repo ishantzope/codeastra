@@ -1,0 +1,348 @@
+// Outbreak Data Constants, Disease Profiles, and Metropolitan Surveillance Zones
+
+export const DISEASES = [
+  {
+    id: 'sars-cov-x',
+    name: 'SARS-CoV-X (Novel Variant)',
+    code: 'SCV-26',
+    category: 'Respiratory / Viral',
+    transmission: 'Airborne Aerosol',
+    incubationDays: '3 - 5 days',
+    baselineDailyRate: 14,
+    baselineWastewaterCopies: 450, // copies/L
+    baselinePharmacyRate: 35, // packs/day
+    r0: 2.35,
+    severity: 'High',
+    color: '#ef4444', // red
+    earlyWarningLeadDays: 4.2,
+    symptoms: ['Acute Dyspnea', 'High Spiking Fever', 'Persistent Cough', 'Hypoxemia'],
+    remedyProtocol: 'Mobilize antiviral reserves, activate negative pressure wards, issue N95 mandate',
+  },
+  {
+    id: 'vibrio-cholerae',
+    name: 'Vibrio Cholerae (O1 El Tor)',
+    code: 'VIB-01',
+    category: 'Waterborne / Bacterial',
+    transmission: 'Contaminated Water / Sanitation',
+    incubationDays: '1 - 3 days',
+    baselineDailyRate: 4,
+    baselineWastewaterCopies: 80,
+    baselinePharmacyRate: 18,
+    r0: 2.10,
+    severity: 'Critical',
+    color: '#f97316', // orange
+    earlyWarningLeadDays: 3.5,
+    symptoms: ['Profuse Watery Diarrhea', 'Severe Dehydration', 'Vomiting', 'Electrolyte Shock'],
+    remedyProtocol: 'Issue municipal boil-water notice, chlorinate Zone B reservoirs, deploy ORS field depots',
+  },
+  {
+    id: 'dengue-denv3',
+    name: 'Dengue Virus (DENV-3 Surges)',
+    code: 'DNV-03',
+    category: 'Vector-borne / Arbovirus',
+    transmission: 'Aedes Aegypti Mosquitoes',
+    incubationDays: '4 - 7 days',
+    baselineDailyRate: 8,
+    baselineWastewaterCopies: 20,
+    baselinePharmacyRate: 25,
+    r0: 1.85,
+    severity: 'High',
+    color: '#eab308', // amber
+    earlyWarningLeadDays: 2.8,
+    symptoms: ['Saddleback High Fever', 'Retro-orbital Pain', 'Severe Thrombocytopenia', 'Petechial Rash'],
+    remedyProtocol: 'Initiate thermal fogging vector containment, secure platelet reserves, open fever clinics',
+  },
+  {
+    id: 'h5n1-avian',
+    name: 'H5N1 Avian Influenza (Spillover Risk)',
+    code: 'H5N-01',
+    category: 'Zoonotic / Emerging Respiratory',
+    transmission: 'Avian-to-Human / Droplet',
+    incubationDays: '2 - 5 days',
+    baselineDailyRate: 1,
+    baselineWastewaterCopies: 15,
+    baselinePharmacyRate: 10,
+    r0: 1.60,
+    severity: 'Critical',
+    color: '#dc2626',
+    earlyWarningLeadDays: 5.1,
+    symptoms: ['Acute Respiratory Distress Syndrome', 'Fever > 39.5°C', 'Encephalopathy', 'Leukopenia'],
+    remedyProtocol: 'Activate Tier-1 Bio-Surveillance quarantine, deploy Oseltamivir ring prophylaxis, halt poultry logistics',
+  },
+  {
+    id: 'norovirus-gii',
+    name: 'Norovirus (GII.4 Cluster)',
+    code: 'NOR-02',
+    category: 'Enteric / Foodborne',
+    transmission: 'Fecal-Oral / Surface Contact',
+    incubationDays: '12 - 48 hours',
+    baselineDailyRate: 12,
+    baselineWastewaterCopies: 320,
+    baselinePharmacyRate: 40,
+    r0: 2.80,
+    severity: 'Medium',
+    color: '#3b82f6',
+    earlyWarningLeadDays: 2.1,
+    symptoms: ['Sudden Explosive Vomiting', 'Abdominal Cramping', 'Low Fever', 'Nausea'],
+    remedyProtocol: 'Deep chemical sanitization in institutional cafeterias, isolate school clusters, rehydration care',
+  },
+  {
+    id: 'mrsa-superbug',
+    name: 'Klebsiella pneumoniae (NDM-1 Superbug)',
+    code: 'KPN-NDM',
+    category: 'Nosocomial / Antimicrobial Resistant',
+    transmission: 'Hospital / ICU Contact',
+    incubationDays: '3 - 10 days',
+    baselineDailyRate: 2,
+    baselineWastewaterCopies: 110,
+    baselinePharmacyRate: 8,
+    r0: 1.30,
+    severity: 'Critical',
+    color: '#a855f7',
+    earlyWarningLeadDays: 3.0,
+    symptoms: ['Ventilator-Associated Pneumonia', 'Sepsis', 'Multidrug Resistance', 'Urinary Infection'],
+    remedyProtocol: 'Enforce strict cohort isolation in ICU, audit antimicrobial stewardship, sterile air filtration',
+  }
+];
+
+export const SURVEILLANCE_ZONES = [
+  {
+    id: 'zone-a',
+    code: 'Z-01',
+    name: 'Metro Central Core',
+    population: 485000,
+    density: 'High (Urban Core)',
+    hospitals: 3,
+    icuBeds: 72,
+    icuOccupied: 58,
+    riskLevel: 'HIGH',
+    coordinates: { x: 50, y: 45 },
+    wastewaterPlant: 'Central Reclamation Plant #1',
+    keyInstitutions: ['City General Hospital', 'Apex Medical Center', 'Grand Transit Terminal'],
+    vulnerabilities: 'High public transit density, underground metro interchange, dense high-rises'
+  },
+  {
+    id: 'zone-b',
+    code: 'Z-02',
+    name: 'Riverside Basin & Industrial',
+    population: 310000,
+    density: 'Medium-High',
+    hospitals: 2,
+    icuBeds: 45,
+    icuOccupied: 41,
+    riskLevel: 'CRITICAL',
+    coordinates: { x: 30, y: 65 },
+    wastewaterPlant: 'River Basin Effluent Station #4',
+    keyInstitutions: ['Riverside Municipal Hospital', 'Water Filtration Plant', 'Chemical Processing Dock'],
+    vulnerabilities: 'Aging water pipelines, seasonal monsoon runoff, informal settlements along river'
+  },
+  {
+    id: 'zone-c',
+    code: 'Z-03',
+    name: 'North Suburban District',
+    population: 275000,
+    density: 'Medium',
+    hospitals: 1,
+    icuBeds: 30,
+    icuOccupied: 19,
+    riskLevel: 'WATCH',
+    coordinates: { x: 42, y: 22 },
+    wastewaterPlant: 'North Pines Reclamation Station',
+    keyInstitutions: ['North Valley Clinic', 'District High School Complex', 'Senior Care Village'],
+    vulnerabilities: 'High concentration of elementary schools and elder care facilities'
+  },
+  {
+    id: 'zone-d',
+    code: 'Z-04',
+    name: 'East Tech & Airport Corridor',
+    population: 360000,
+    density: 'High',
+    hospitals: 2,
+    icuBeds: 50,
+    icuOccupied: 32,
+    riskLevel: 'ELEVATED',
+    coordinates: { x: 75, y: 35 },
+    wastewaterPlant: 'Corridor Bio-Sampling Hub #7',
+    keyInstitutions: ['International Airport Medical Quarantine', 'Eastside Trauma Center', 'Tech Hub Campus'],
+    vulnerabilities: 'High international traveler inflow, air cargo logistics, rapid cross-border seeding'
+  },
+  {
+    id: 'zone-e',
+    code: 'Z-05',
+    name: 'West Greenhills Township',
+    population: 180000,
+    density: 'Low-Medium',
+    hospitals: 1,
+    icuBeds: 20,
+    icuOccupied: 8,
+    riskLevel: 'NORMAL',
+    coordinates: { x: 20, y: 35 },
+    wastewaterPlant: 'West Greenhills Eco-Plant',
+    keyInstitutions: ['Community Health Center West', 'Wholesale Produce & Livestock Market'],
+    vulnerabilities: 'Animal-human interface, wholesale live poultry and livestock transit'
+  },
+  {
+    id: 'zone-f',
+    code: 'Z-06',
+    name: 'South Harbor & Maritime Docks',
+    population: 220000,
+    density: 'Medium',
+    hospitals: 1,
+    icuBeds: 25,
+    icuOccupied: 14,
+    riskLevel: 'WATCH',
+    coordinates: { x: 65, y: 78 },
+    wastewaterPlant: 'South Port Ocean Outfall Station',
+    keyInstitutions: ['Seamen Harbor Clinic', 'Customs Quarantine Depot'],
+    vulnerabilities: 'Maritime shipping crews, ballast water discharge, tropical container cargo'
+  },
+  {
+    id: 'zone-g',
+    code: 'Z-07',
+    name: 'Old Historic Ward',
+    population: 195000,
+    density: 'Very High',
+    hospitals: 1,
+    icuBeds: 22,
+    icuOccupied: 20,
+    riskLevel: 'HIGH',
+    coordinates: { x: 40, y: 52 },
+    wastewaterPlant: 'Heritage Ward Drainage Sump #3',
+    keyInstitutions: ['Heritage Memorial Dispensary', 'Spice & Food Bazaar'],
+    vulnerabilities: 'Narrow alleyways, open storm drains, high vector breeding, limited ventilation'
+  },
+  {
+    id: 'zone-h',
+    code: 'Z-08',
+    name: 'University & Research Park',
+    population: 140000,
+    density: 'Medium-High',
+    hospitals: 1,
+    icuBeds: 18,
+    icuOccupied: 10,
+    riskLevel: 'NORMAL',
+    coordinates: { x: 80, y: 62 },
+    wastewaterPlant: 'Academia Sub-drainage Collector',
+    keyInstitutions: ['University Health Infirmary', 'Institute of Virology Labs'],
+    vulnerabilities: 'High congregate student dorms, dining commons, laboratory biosafety interface'
+  }
+];
+
+export const ALERT_LEVELS = {
+  NORMAL: {
+    level: 0,
+    name: 'Normal Baseline',
+    badge: 'NORMAL',
+    color: '#059669',
+    bgClass: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+    description: 'Case counts, wastewater viral copies, and OTC sales are within normal Poisson fluctuations (Z < 1.5).'
+  },
+  WATCH: {
+    level: 1,
+    name: 'Surveillance Watch',
+    badge: 'WATCH',
+    color: '#0284c7',
+    bgClass: 'bg-sky-50 text-sky-800 border-sky-200',
+    description: 'Minor aberration detected in secondary signal (Wastewater or OTC Pharmacy). Epidemiological review recommended.'
+  },
+  ADVISORY: {
+    level: 2,
+    name: 'Early Advisory',
+    badge: 'ADVISORY',
+    color: '#d97706',
+    bgClass: 'bg-amber-50 text-amber-900 border-amber-200',
+    description: 'CUSUM threshold exceeded (C > 3.0) or Z-score > 2.0. Clinical ED admissions showing upward slope.'
+  },
+  WARNING: {
+    level: 3,
+    name: 'Outbreak Warning',
+    badge: 'WARNING',
+    color: '#ea580c',
+    bgClass: 'bg-orange-50 text-orange-900 border-orange-200',
+    description: 'Multi-stream concordance confirmed. R_t > 1.4 across multiple wards. Rapid response teams put on standby.'
+  },
+  CRITICAL: {
+    level: 4,
+    name: 'Crisis / Outbreak Red',
+    badge: 'CRITICAL EMERGENCY',
+    color: '#e11d48',
+    bgClass: 'bg-rose-50 text-rose-900 border-rose-300',
+    description: 'Confirmed localized epidemic cluster. R_t > 2.0, ICU bed surge pressure > 85%. Automated emergency protocols activated.'
+  }
+};
+
+export const SURVEILLANCE_SOURCES = [
+  { id: 'ed_clinical', name: 'Emergency Departments (ED)', weight: 0.35, icon: 'Hospital', unit: 'Admissions / 100k' },
+  { id: 'wastewater', name: 'Wastewater Genomics (WBE)', weight: 0.30, icon: 'Droplets', unit: 'Viral copies / L', leadAdvantage: '3 - 5 Days Early' },
+  { id: 'pharmacy_otc', name: 'Pharmacy OTC Sales', weight: 0.20, icon: 'Pill', unit: 'Daily index pack velocity', leadAdvantage: '2 - 3 Days Early' },
+  { id: 'absenteeism', name: 'School & Work Absenteeism', weight: 0.10, icon: 'School', unit: '% Unscheduled absences' },
+  { id: 'ems_dispatch', name: 'EMS 911 Triage Calls', weight: 0.05, icon: 'Ambulance', unit: 'Syndromic dispatches' }
+];
+
+export const HACKATHON_SCENARIOS = [
+  {
+    id: 'scenario-wastewater-respiratory',
+    name: '⚡ Scenario 1: Wastewater Early Warning (Novel SARS-CoV-X)',
+    diseaseId: 'sars-cov-x',
+    zoneId: 'zone-a',
+    summary: 'Wastewater viral copies surge 420% in Zone A while ER cases are still baseline. Detects outbreak 4 days before hospital crisis.',
+    description: 'Demonstrates the power of multi-source early warning. The wastewater treatment plant detects exponential genomic shedding on Day 1-2. CUSUM flags the anomaly on Day 2, allowing health officers to stock antivirals before the hospital ER is overrun on Day 6.',
+    initialWastewaterMult: 4.8,
+    initialPharmacyMult: 2.2,
+    initialEdMult: 1.2,
+    targetRt: 2.45,
+    projectedLeadDays: 4.5
+  },
+  {
+    id: 'scenario-cholera-riverside',
+    name: '🌊 Scenario 2: Waterborne Cholera Spike in Riverside Basin',
+    diseaseId: 'vibrio-cholerae',
+    zoneId: 'zone-b',
+    summary: 'Monsoon pipeline rupture triggers sharp cluster of watery diarrhea & severe dehydration along Zone B river corridor.',
+    description: 'High attack rate cluster. OTC rehydration sales skyrocket 380%, emergency department receives acute hypovolemic patients. Spatial cluster analysis locks onto Riverside Basin within 6 hours.',
+    initialWastewaterMult: 3.5,
+    initialPharmacyMult: 4.2,
+    initialEdMult: 3.8,
+    targetRt: 2.15,
+    projectedLeadDays: 3.2
+  },
+  {
+    id: 'scenario-dengue-monsoon',
+    name: '🦟 Scenario 3: Monsoon Dengue Fever Surge',
+    diseaseId: 'dengue-denv3',
+    zoneId: 'zone-g',
+    summary: 'Old Historic Ward (Zone G) and Riverside (Zone B) report vector clustering. Platelet shortages imminent.',
+    description: 'Rising temperature and stagnant water trigger massive vector proliferation. Thrombocytopenia lab alerts breach Farrington baseline by 3.4 standard deviations. Automated thermal fogging dispatch triggered.',
+    initialWastewaterMult: 1.5,
+    initialPharmacyMult: 3.1,
+    initialEdMult: 2.9,
+    targetRt: 1.95,
+    projectedLeadDays: 2.8
+  },
+  {
+    id: 'scenario-superbug-icu',
+    name: '☣️ Scenario 4: Hospital ICU Superbug Outbreak (NDM-1)',
+    diseaseId: 'mrsa-superbug',
+    zoneId: 'zone-a',
+    summary: 'Antimicrobial-resistant Klebsiella NDM-1 cluster detected in City General Hospital ICU. 100% resistance to Carbapenems.',
+    description: 'High fatality rate nosocomial crisis. Spatial Knox analysis isolates infection to Ward 4B and 4C. Immediate cohort quarantine and automated decontamination protocols issued.',
+    initialWastewaterMult: 2.9,
+    initialPharmacyMult: 1.4,
+    initialEdMult: 2.6,
+    targetRt: 1.45,
+    projectedLeadDays: 2.5
+  },
+  {
+    id: 'scenario-baseline-normal',
+    name: '✅ Scenario 5: Controlled Baseline (Normal Operations)',
+    diseaseId: 'norovirus-gii',
+    zoneId: 'zone-c',
+    summary: 'All surveillance streams within nominal Poisson tolerances. Threat index green, no aberrant signals.',
+    description: 'System functions in steady-state surveillance. Confidence calibration confirms 0 false positives during baseline fluctuations.',
+    initialWastewaterMult: 1.0,
+    initialPharmacyMult: 1.0,
+    initialEdMult: 1.0,
+    targetRt: 0.95,
+    projectedLeadDays: 0
+  }
+];
